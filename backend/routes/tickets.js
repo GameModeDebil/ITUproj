@@ -7,6 +7,10 @@ const {
     updateTicket
 } = require('../controllers/ticketController')
 const requireAuth = require('../middleware/requireAuth')
+const { 
+    createChatMessage, 
+    getChatMessages
+} = require('../controllers/chatCommentController')
 
 const router = express.Router()
 
@@ -27,5 +31,12 @@ router.delete('/:id', deleteTicket)
 
 //UPDATE a new ticket
 router.patch('/:id', updateTicket)
+
+//ATTACH a comment to the ticket
+router.post('/:id', createChatMessage)
+
+//GET all comments attached to the ticket
+router.get('/:id/cm', getChatMessages)
+
 
 module.exports = router
