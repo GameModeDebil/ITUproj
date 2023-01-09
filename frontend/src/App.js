@@ -11,6 +11,7 @@ import AdminTickets from './pages/AdminTickets'
 import AdminUsers from './pages/AdminUsers'
 
 import Ticket from './pages/Ticket'
+import Profile from './pages/Profile'
 
 function App() {
   const { user } = useAuthContext()
@@ -44,6 +45,10 @@ function App() {
             <Route
               path="/admin/users"
               element={user ? <AdminUsers /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/profile/:id"
+              element={user ? <Profile /> : <Navigate to="/login" />}
             />
           </Routes>
         </div>

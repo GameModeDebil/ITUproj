@@ -50,6 +50,11 @@ header a {
   font-size: 1.2em;
   color: var(--primary);
 }
+.ticket-details h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
 .ticket-details p {
   margin: 0;
   font-size: 0.9em;

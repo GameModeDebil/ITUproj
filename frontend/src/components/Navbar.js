@@ -22,9 +22,11 @@ const Navbar = () => {
                             <Link to="/">
                                 <button>Tickets</button>
                             </Link>
-                            <span>{user.email}</span>                    
+                            <Link to={"/profile/" + user.id}>
+                                <span>{user.email}</span>                    
+                            </Link>                  
                     
-                            {user.role == "admin" ? (
+                            {user.role === "admin" ? (
                                         <div className="dropdown">
                                             <button className="dropbtn">Admin</button>
                                             <div className="dropdown-content">
