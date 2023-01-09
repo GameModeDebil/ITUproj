@@ -101,7 +101,7 @@ const TicketForm = () => {
             <label>Priority:</label>
             <select value={priority} onChange={(e) => handleChange(e.target.value)}>
                 {options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
+                    <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
             </select>
 

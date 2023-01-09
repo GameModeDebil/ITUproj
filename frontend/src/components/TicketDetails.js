@@ -29,16 +29,18 @@ const TicketDetails = ({ ticket }) => {
 
     return (
         <div className="ticket-details-main">
-            <Link to={"/ticket/" + ticket._id}>
-                <div className="ticket-details">
-                    <h3>{ticket.title}</h3>
-                    <p><b>Created by:</b> <i>{ticket.creator}</i></p>
-                    <p><b>Created:</b> <i>{formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}</i></p>
-                    <p><b>Last Update:</b> <i>{formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true })}</i></p>
-                    <p>{ticket.text}</p>
-                    <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
-                </div>
-            </Link>
+            <div className="ticket-details">
+                <Link to={"/ticket/" + ticket._id}>
+                    <div>
+                        <h3>{ticket.title}</h3>
+                        <p><b>Created by:</b> <i>{ticket.creator}</i></p>
+                        <p><b>Created:</b> <i>{formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}</i></p>
+                        <p><b>Last Update:</b> <i>{formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true })}</i></p>
+                        <p>{ticket.text}</p>
+                    </div>
+                </Link>
+                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+            </div>
         </div>
     )
 }

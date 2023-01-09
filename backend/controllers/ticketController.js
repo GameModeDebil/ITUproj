@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 //get all tickets
 const getTickets = async (req, res) => {
     const user = await User.findById(req.user._id)
-    const tickets = await Ticket.find({ creator: user.email }).sort({createdAt: -1})
+    const tickets = await Ticket.find({ company: user.company }).sort({createdAt: -1})
     res.status(200).json(tickets)
 }
 

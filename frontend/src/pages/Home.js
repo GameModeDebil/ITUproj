@@ -19,7 +19,7 @@ const customStyles = {
       width: '75%',
       border: '1px solid black'
     },
-  };
+};
 
 const Home = () => {
     const {tickets, dispatch} = useTicketsContext()
@@ -63,6 +63,7 @@ const Home = () => {
                         add
                     </span>
                     <Modal
+                        appElement={document.getElementById('root') || undefined}
                         isOpen={modalIsOpen}
                         onRequestClose={closeModal}
                         style={customStyles}
