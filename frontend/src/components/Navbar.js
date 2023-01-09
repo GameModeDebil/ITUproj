@@ -16,17 +16,24 @@ const Navbar = () => {
                 <Link to="/">
                     <h1>Lerner Solutions</h1>
                 </Link>
-                <div className="dropdown">
-                    <button className="dropbtn">Admin</button>
-                    <div className="dropdown-content">
-                        <Link to="/admin/tickets">Tickets</Link>
-                        <Link to="/admin/users">Users</Link>
-                    </div>
-                </div>
                 <nav>
                     {user && (
                         <div>
-                            <span>{user.email}</span>
+                            <Link to="/">
+                                <button>Tickets</button>
+                            </Link>
+                            <span>{user.email}</span>                    
+                    
+                            {user.role == "admin" ? (
+                                        <div className="dropdown">
+                                            <button className="dropbtn">Admin</button>
+                                            <div className="dropdown-content">
+                                                <Link to="/admin/tickets">Tickets</Link>
+                                                <Link to="/admin/users">Users</Link>
+                                            </div>
+                                        </div>
+                            ):""}
+                            
                             <button onClick={handleClick}>Logout</button>
                         </div>
                     )}

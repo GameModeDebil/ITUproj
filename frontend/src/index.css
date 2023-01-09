@@ -137,6 +137,10 @@ nav a {
   margin-left: 0px;
 }
 
+nav span {
+  margin-left: 10px;
+}
+
 nav button {
   background: #fff;
   color: var(--primary);
@@ -224,6 +228,11 @@ form.signup, form.login {
   padding: 5px 25px 25px;
   border-radius: 4px;
 }
+
+.main-div h2{
+  color: var(--primary);
+}
+
 
 .adminTickets table {
   width: 100%;
