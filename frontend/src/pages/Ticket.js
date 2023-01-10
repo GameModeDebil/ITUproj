@@ -134,8 +134,8 @@ const Ticket = () => {
     //cant add time?
     if (!editMode) {
         return (
-            <div className="ticket-details-main">
-                <div className="ticket-details">
+            <div className="ticket-details2-main">
+                <div className="ticket-details2">
                     <h2>{title}</h2>
                     <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
                     <p><b>Created:</b> <i>{
@@ -144,7 +144,8 @@ const Ticket = () => {
                     <p><b>Last Update:</b> <i>{
                         updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : ""
                     }</i></p>
-                    <p>{text}</p>
+                    <br></br>
+                    <p className="ticket-text">{text}</p>
                     <span className="material-symbols-outlined" onClick={openEditMode}>edit</span>
                 </div>
             </div>
@@ -164,13 +165,14 @@ const Ticket = () => {
                     />
 
                     <label>Text:</label>
-                    <input
+                    <textarea
                         type="text"
                         onChange={(e) => setText(e.target.value)}
                         value={text}
                         //className={emptyFields.includes('location') ? 'error' : ''}
                         required
-                    />
+                        className="textfield-height"
+                    ></textarea>
 
                     <label>Location:</label>
                     <input

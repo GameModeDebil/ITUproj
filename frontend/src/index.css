@@ -37,6 +37,10 @@ header a {
   display: grid;
   gap: 100px;
 }
+.bigger-margin {
+  margin: 30px auto;
+}
+
 .ticket-details {
   background: #fff;
   border-radius: 4px;
@@ -44,9 +48,6 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-}
-.bigger-margin {
-  margin: 30px auto;
 }
 .ticket-details h3 {
   margin: 0 0 10px 0;
@@ -92,6 +93,58 @@ header a {
   color: white;
 }
 
+.ticket-details2 {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.ticket-details2 h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.ticket-details2 h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.ticket-details2 p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+  max-width: 1400px;
+  white-space: break-spaces;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ticket-details2 .small {
+  margin: 0;
+  font-size: 0.8em;
+  color: #555;
+  max-width: 1400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ticket-details2 span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.ticket-details2-main a {
+  color: white;
+}
+
 .headline {
   text-align: center;
 }
@@ -112,10 +165,10 @@ header a {
 }
 
 /* new workout form */
-label, input, select {
+label, input, select, textarea{
   display: block;
 }
-input, select {
+input, select, textarea{
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -278,4 +331,10 @@ form.signup, form.login {
 
 th {
   background-color: var(--primary);
+}
+
+.textfield-height {
+  height: auto;
+  white-space: pre-wrap;
+  overflow: hidden;
 }
