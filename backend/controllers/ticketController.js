@@ -8,7 +8,6 @@ const getTickets = async (req, res) => {
     let tickets
     if(user.role == "employee"){
         tickets = await Ticket.find({}).sort({createdAt: -1})
-        res.status(200).json(tickets)
     } else {
         tickets = await Ticket.find({ company: user.company }).sort({createdAt: -1})
     }

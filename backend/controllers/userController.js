@@ -29,17 +29,35 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.signup(name, password, email, company)
+        let role = user.role
+        let id = user._id
+
         //create a token
         const token = createToken(user._id)
 
-        res.status(200).json({email, token})
+        res.status(200).json({email, token, role, id})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
+const deleteUser = async (req, res) => {
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'User not found'})
+    }
+    const user = await User.findOneAndDelete({_id: id})
+
+    if(!user){
+        return res.status(404).json({error: 'User not found'})
+    }
+
+    res.status(200).json(user)
+}
 
 module.exports = {
     signupUser,
-    loginUser
+    loginUser,
+    deleteUser
 }
