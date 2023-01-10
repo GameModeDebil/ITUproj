@@ -44,7 +44,7 @@ const ticketSchema = new Schema({
         required: true
     },
     assigned_employee_id: {
-        type: Number,
+        type: mongoose.ObjectId,
         required: false
     }
 }, {timestamps: true})

@@ -95,7 +95,9 @@ const Home = () => {
                     </Modal>
                 </div>
                 {tickets && tickets.map((ticket) => (
+                    ticket.state ?
                     <TicketDetails key={ticket._id} ticket={ticket} />
+                    : null
                 ))}
             </div>
         </div>

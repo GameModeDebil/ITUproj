@@ -50,7 +50,8 @@ const createTicket = async (req, res) => {
         comments = "" //temp fix
         state = true   //temp fix
         internal = (user.company == "LS") ? true : false
-        const ticket = await Ticket.create({title, text, company: user.company, creator: user._id, location, priority, comments, state, internal})
+        assigned_employee_id = null
+        const ticket = await Ticket.create({title, text, company: user.company, creator: user._id, location, priority, comments, state, internal, assigned_employee_id})
         res.status(200).json(ticket)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -78,23 +79,29 @@ const updateTicket = async (req, res) => {
     const {id} = req.params
 
     const {title, text, location, priority, state} = req.body
+    console.log(req.body)
 
     let emptyFields = []
 
     if(!title){
         emptyFields.push('title')
+        console.log("title")
     }
     if(!text){
         emptyFields.push('text')
+        console.log("text")
     }
     if(!location){
         emptyFields.push('location')
+        console.log("location")
     }
     if(!priority){
         emptyFields.push('priority')
+        console.log("priority")
     }
     if(!state){
         emptyFields.push('state')
+        console.log("state")
     }
 
     if(emptyFields.length > 0){

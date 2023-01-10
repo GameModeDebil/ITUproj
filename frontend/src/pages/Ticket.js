@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useTicketsContext } from "../hooks/useTicketsContext"
+import { useNavigate } from "react-router-dom";
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
@@ -8,6 +9,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import ChatMessageDetails from '../components/ChatMessageDetails'
 
 const Ticket = () => {
+    const navigate = useNavigate();
     const {user} = useAuthContext()
     const { dispatch } = useTicketsContext()
 
@@ -19,7 +21,7 @@ const Ticket = () => {
     const [company, setCompany] = useState('')
     const [location, setLocation] = useState('')
     const [priority, setPriority] = useState(1)
-    const [state, setState] = useState(0)
+    const [state, setState] = useState(true)
     const [createdAt, setCreatedAt] = useState('')
     const [updatedAt, setUpdatedAt] = useState('')
     const [internal, setInternal] = useState(false)
@@ -28,7 +30,6 @@ const Ticket = () => {
 
     const [creator_name, setCreatorName] = useState('')
     const [creator_email, setCreatorEmail] = useState('')
-    const [creator_profile_picture, setCreatorProfilePicture] = useState('')
 
     const [editMode, setEditMode] = useState(false)
     const [chatMessages, setChatMessages] = useState('')
@@ -65,7 +66,6 @@ const Ticket = () => {
             const json_creator = await response_creator.json()
             setCreatorName(json_creator.name)
             setCreatorEmail(json_creator.email)
-            setCreatorProfilePicture(json_creator.profile_picture)
         }
 
         const fetchMessages = async () => {
@@ -115,10 +115,8 @@ const Ticket = () => {
         }
 
         const ticket = {title, text, location, priority, state}
-        console.log(ticket)
 
-        if (title !== "" && text !== "" && location !== "" && state !== ""){
-            console.log("hello")
+        if (title !== "" && text !== "" && location !== ""){
             const response2 = await fetch('/api/tickets/' + ticketID, {
                 method: 'PATCH',
                 body: JSON.stringify(ticket),
@@ -148,7 +146,30 @@ const Ticket = () => {
         setPriority(selected)
     }
 
-    //cant add time?
+    const handleClick = async () => {
+        if (!user) {
+            return
+        }
+        setState(false)
+        const ticket = {title, text, location, priority, state: "false"}
+        const response = await fetch('/api/tickets/' + ticketID, {
+            method: 'PATCH',
+            body: JSON.stringify(ticket),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+            
+        })
+        const json = await response.json()
+        
+        if (response.ok){
+            dispatch({type: 'DELETE_TICKET', payload: json})
+            dispatch({type: 'CREATE_TICKET', payload: json})
+            navigate("/")
+        }     
+    }
+
     if (!editMode) {
         return (
             <div className="ticket-details2-main">
@@ -164,6 +185,7 @@ const Ticket = () => {
                     <br></br>
                     <p className="ticket-text">{text}</p>
                     <span className="material-symbols-outlined" onClick={openEditMode}>edit</span>
+                    <div className="ticketEditButton"><span className="material-symbols-outlined" onClick={handleClick}>check</span></div>
                 </div>
                     <h2>Comments</h2>
                 <div className="ticket-details-main">

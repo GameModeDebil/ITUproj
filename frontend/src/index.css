@@ -95,7 +95,7 @@ header a {
 }
 
 .ticket-details-main a {
-  color: white;
+  text-decoration: none;
 }
 
 .ticket-details2 {
@@ -392,7 +392,24 @@ th {
   position: fixed;
   z-index: 1;
 }
+
 .scrollButtonDiv span:hover {
   background: var(--primary);
   color: white;
+}
+
+.ticketEditButton span {
+  right: 65px;
+}
+
+.claimButtonOverview span {
+  right: 65px;
+}
+
+.ticket-details-main .internal_ticket {
+  background-color: #f8f8f8;
+}
+
+.ticket-details-main .own_ticket {
+  box-shadow: 2px 2px 5px var(--primary);
 }
