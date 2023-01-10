@@ -29,7 +29,23 @@ const getMinUser = async(req, res) => {
     res.status(200).json(returnableUser)
 }
 
+const updateTicket = async (req, res) => {
+    const {id} = req.params
+
+    const user = await User.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+
+
+    if(!user){
+        return res.status(404).json({error: 'User not found'})
+    }
+
+    res.status(200).json(user)
+}
+
 module.exports = {
     getUser,
-    getMinUser
+    getMinUser,
+    updateUser
 }
