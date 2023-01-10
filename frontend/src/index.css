@@ -36,6 +36,7 @@ header a {
 .home {
   display: grid;
   gap: 100px;
+  margin-bottom: 100px;
 }
 .bigger-margin {
   margin: 30px auto;
@@ -88,6 +89,10 @@ header a {
   color: #333;
   margin-bottom: 10px;
 }
+.ticket-details span:hover {
+  color: white;
+  background-color: var(--primary);
+}
 
 .ticket-details-main a {
   color: white;
@@ -139,6 +144,11 @@ header a {
   border-radius: 50%;
   color: #333;
   margin-bottom: 10px;
+}
+
+.ticket-details2 span:hover {
+  color: white;
+  background-color: var(--primary);
 }
 
 .ticket-details2-main a {
@@ -341,4 +351,48 @@ th {
   height: auto;
   white-space: pre-wrap;
   overflow: hidden;
+}
+.edit-save-button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+.edit-save-button:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.scrollButtonDiv {
+  background: black;
+  border-radius: 4px;
+  margin: 20px auto;
+  width: 10%;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.scrollButtonDiv span {
+  background: white;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  bottom: 40px;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 2rem;
+  left: 50%;
+  padding: 6px;
+  position: fixed;
+  z-index: 1;
+}
+.scrollButtonDiv span:hover {
+  background: var(--primary);
+  color: white;
 }

@@ -2,7 +2,7 @@ const Ticket = require('../models/ticketModel')
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
 
-//get all tickets
+//get all active tickets
 const getTickets = async (req, res) => {
     const user = await User.findById(req.user._id)
     const tickets = await Ticket.find({ company: user.company }).sort({createdAt: -1})
@@ -48,8 +48,8 @@ const createTicket = async (req, res) => {
     try{
         const user = await User.findById(req.user._id)
         comments = "" //temp fix
-        state = 1   //temp fix
-        internal = true
+        state = true   //temp fix
+        internal = (user.company == "LS") ? true : false
         const ticket = await Ticket.create({title, text, company: user.company, creator: user._id, location, priority, comments, state, internal})
         res.status(200).json(ticket)
     } catch (error) {

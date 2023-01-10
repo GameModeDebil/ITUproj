@@ -53,19 +53,21 @@ const TicketDetails = ({ ticket }) => {
     }
 
     return (
-        <div className="ticket-details-main">
-            <div className="ticket-details">
-                <Link to={"/ticket/" + ticket._id}>
-                    <div>
-                        <h3>{ticket.title}</h3>
-                        <p className="small"><i>Created: {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })} {ticket.createdAt !== ticket.updatedAt ? "- Updated: " +formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true }) :""}</i></p>
-                        <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
-                        <p><b>Location:</b> {ticket.location}</p>
-                        <br></br>
-                        <p>{ticket.text}</p>
-                    </div>
-                </Link>
-                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+        <div>
+            <div className="ticket-details-main">
+                <div className="ticket-details">
+                    <Link to={"/ticket/" + ticket._id}>
+                        <div>
+                            <h3>{ticket.title}</h3>
+                            <p className="small"><i>Created: {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })} {ticket.createdAt !== ticket.updatedAt ? "- Updated: " +formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true }) :""}</i></p>
+                            <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
+                            <p><b>Location:</b> {ticket.location}</p>
+                            <br></br>
+                            <p>{ticket.text}</p>
+                        </div>
+                    </Link>
+                    { user.email === creator_email || user.role==="admin" ? <span className="material-symbols-outlined" onClick={handleClick}>check</span>:""}
+                </div>
             </div>
         </div>
     )
