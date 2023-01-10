@@ -60,7 +60,7 @@ const TicketDetails = ({ ticket }) => {
                         <h3>{ticket.title}</h3>
                         <p className="small"><i>Created: {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })} {ticket.createdAt !== ticket.updatedAt ? "- Updated: " +formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true }) :""}</i></p>
                         <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
-                        <p><b>Location:</b> {ticket.location}<i>({creator_email})</i></p>
+                        <p><b>Location:</b> {ticket.location}</p>
                         <br></br>
                         <p>{ticket.text}</p>
                     </div>

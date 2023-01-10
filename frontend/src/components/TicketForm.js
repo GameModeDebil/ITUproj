@@ -83,12 +83,12 @@ const TicketForm = () => {
             />
 
             <label>Text:</label>
-            <input
+            <textarea
                 type="text"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
-                className={emptyFields.includes('text') ? 'error' : ''}
-            />
+                className={emptyFields.includes('text') ? 'error' : 'textfield-height'}
+            ></textarea>
             
             <label>Location:</label>
             <input
