@@ -16,7 +16,7 @@ const ticketSchema = new Schema({
         required: true
     },
     creator: {
-        type: String,
+        type: mongoose.ObjectId,
         required: true
     },
     location: {

@@ -6,6 +6,9 @@ const mongoose = require('mongoose')
 // get all  chat messages that belong to to the current ticket
 const getChatMessages = async (req, res) => {
     const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'Ticket not found'})
+    }
     const chatMessages = await ChatMessage.find({belongToTicket: id}).sort({createdAt: -1})
     res.status(200).json(chatMessages)
 }

@@ -45,6 +45,9 @@ header a {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
+.bigger-margin {
+  margin: 30px auto;
+}
 .ticket-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
@@ -64,6 +67,15 @@ header a {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.ticket-details .small {
+  margin: 0;
+  font-size: 0.8em;
+  color: #555;
+  max-width: 1400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .ticket-details span {
   position: absolute;
   top: 20px;
@@ -73,6 +85,7 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+  margin-bottom: 10px;
 }
 
 .ticket-details-main a {

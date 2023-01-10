@@ -64,7 +64,7 @@ const TicketForm = () => {
             setTitle('')
             setText('')
             setLocation('')
-            setPriority('')
+            setPriority('1')
             //console.log('new ticket added', json)     //debug added ticket
             dispatch({type: 'CREATE_TICKET', payload: json})
         }

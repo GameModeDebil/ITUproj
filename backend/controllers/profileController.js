@@ -15,6 +15,21 @@ const getUser = async(req, res) => {
     res.status(200).json(returnableUser)
 }
 
+//get a minimized, single user
+const getMinUser = async(req, res) => {
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'User not found'})
+    }
+    const user = await User.findById(id)
+    if(!user){
+        return res.status(404).json({error: 'User not found'})
+    }
+    const { password, phone, company, role, verified, ...returnableUser} = user._doc;
+    res.status(200).json(returnableUser)
+}
+
 module.exports = {
-    getUser
+    getUser,
+    getMinUser
 }

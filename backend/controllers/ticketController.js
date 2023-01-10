@@ -22,7 +22,7 @@ const getTicket = async(req, res) => {
     res.status(200).json(ticket)
 }
 
-//create new workout
+//create new ticket
 const createTicket = async (req, res) => {
     const {title, text, location, priority} = req.body
 
@@ -50,14 +50,14 @@ const createTicket = async (req, res) => {
         comments = "" //temp fix
         state = 1   //temp fix
         internal = true
-        const ticket = await Ticket.create({title, text, company: user.company, creator: user.email, location, priority, comments, state, internal})
+        const ticket = await Ticket.create({title, text, company: user.company, creator: user._id, location, priority, comments, state, internal})
         res.status(200).json(ticket)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
-//delete a workout
+//delete a ticket
 const deleteTicket = async (req, res) => {
     const {id} = req.params
 
@@ -73,17 +73,38 @@ const deleteTicket = async (req, res) => {
     res.status(200).json(ticket)
 }
 
-//update workout
+//update ticket
 const updateTicket = async (req, res) => {
     const {id} = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'Ticket not found'})
+    const {title, text, location, priority, state} = req.body
+
+    let emptyFields = []
+
+    if(!title){
+        emptyFields.push('title')
+    }
+    if(!text){
+        emptyFields.push('text')
+    }
+    if(!location){
+        emptyFields.push('location')
+    }
+    if(!priority){
+        emptyFields.push('priority')
+    }
+    if(!state){
+        emptyFields.push('state')
+    }
+
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'Please fill in all the required fields.', emptyFields})
     }
 
     const ticket = await Ticket.findOneAndUpdate({_id: id}, {
         ...req.body
     })
+
 
     if(!ticket){
         return res.status(404).json({error: 'Ticket not found'})
