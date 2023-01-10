@@ -189,16 +189,7 @@ const Ticket = () => {
                             <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
                     </select>
-
-                    <label>State:</label>
-                    <input
-                        type="number"
-                        onChange={(e) => setState(e.target.value)}
-                        value={state}
-                        //className={emptyFields.includes('location') ? 'error' : ''}
-                        required
-                    />
-                    <button>Save</button>
+                    <button className="edit-save-button">Save</button>
                     </form>
                 </div>
             </div>

@@ -27,6 +27,26 @@ const Home = () => {
 
     const [modalIsOpen, setIsOpen] = useState(false);
 
+    const [visible, setVisible] = useState(false)
+
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300){
+            setVisible(true)
+        } 
+        else if (scrolled <= 300){
+            setVisible(false)
+        }
+    };
+    
+    const scrollToTop = () =>{
+        window.scrollTo({
+        top: 0, 
+        behavior: 'smooth'
+        });
+    }
+    window.addEventListener('scroll', toggleVisible);
+
     function openModal() {
         setIsOpen(true)
     }
@@ -57,6 +77,9 @@ const Home = () => {
     return (
         <div className="home">
             <div>
+                <div className="scrollButtonDiv" onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}}>
+                    <span className="material-symbols-outlined">arrow_upward</span>
+                </div>
                 <div className="headline">
                     <h1>Tickets</h1>
                     <span className="material-symbols-outlined" onClick={openModal}>

@@ -10,17 +10,6 @@ const createToken = (_id) => {
 const loginUser = async (req, res) => {
     const {email, password} = req.body
 
-    /*let emptyFields = []
-    if (!password) {
-        emptyFields.push('password')
-    }
-    if (!email) {
-        emptyFields.push('email')
-    }
-    if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all the required fields.', emptyFields})
-    }*/
-
     try {
         const user = await User.login(email, password)
         let role = user.role
@@ -37,24 +26,6 @@ const loginUser = async (req, res) => {
 //signup user
 const signupUser = async (req, res) => {
     const {name, password, email, company} = req.body
-
-    /*let emptyFields = []
-    if (!name) {
-        emptyFields.push('name')
-    }
-    if (!password) {
-        emptyFields.push('password')
-    }
-    if (!email) {
-        emptyFields.push('email')
-    }
-    if (!company) {
-        emptyFields.push('company')
-    }
-    if (emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all the required fields.', emptyFields})
-    }*/
-
 
     try {
         const user = await User.signup(name, password, email, company)

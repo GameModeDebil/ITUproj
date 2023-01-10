@@ -32,7 +32,7 @@ const ticketSchema = new Schema({
         required: false
     },
     state: {
-        type: Number,
+        type: Boolean,
         required: true
     },
     completion_date: {
