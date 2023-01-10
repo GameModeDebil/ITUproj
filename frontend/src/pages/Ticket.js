@@ -4,6 +4,9 @@ import { useTicketsContext } from "../hooks/useTicketsContext"
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
+//components 
+import ChatMessageDetails from '../components/ChatMessageDetails'
+
 const Ticket = () => {
     const {user} = useAuthContext()
     const { dispatch } = useTicketsContext()
@@ -27,8 +30,8 @@ const Ticket = () => {
     const [creator_email, setCreatorEmail] = useState('')
     const [creator_profile_picture, setCreatorProfilePicture] = useState('')
 
-
     const [editMode, setEditMode] = useState(false)
+    const [chatMessages, setChatMessages] = useState('')
 
     useEffect(() => {
         const fetchTicket = async () => {
@@ -65,8 +68,22 @@ const Ticket = () => {
             setCreatorProfilePicture(json_creator.profile_picture)
         }
 
+        const fetchMessages = async () => {
+            let url = window.location.pathname
+            url = url.split("/")[2]
+            const response = await fetch('/api/tickets/' + url + '/cm', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+
+            const json = await response.json()
+            setChatMessages(json)
+        }
+
         if (user) {
             fetchTicket()
+            fetchMessages()
         }
     }, [user])
 
@@ -147,6 +164,12 @@ const Ticket = () => {
                     <br></br>
                     <p className="ticket-text">{text}</p>
                     <span className="material-symbols-outlined" onClick={openEditMode}>edit</span>
+                </div>
+                    <h2>Comments</h2>
+                <div className="ticket-details-main">
+                    {chatMessages && chatMessages.map((chatMessage) => (
+                        <ChatMessageDetails key={chatMessage._id} chatMessage={chatMessage} />
+                    ))}
                 </div>
             </div>
         )
