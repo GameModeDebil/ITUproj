@@ -62,7 +62,7 @@ userSchema.statics.signup = async function(name, password, email, company) {
     const hash = await bcrypt.hash(password, salt)
 
     profile_picture = "temp"    //temp fix
-    role = "customer"
+    role = (company == "LS") ? "employee" : "customer"
     phone = null
     verified = false
 

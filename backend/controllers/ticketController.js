@@ -5,7 +5,13 @@ const mongoose = require('mongoose')
 //get all active tickets
 const getTickets = async (req, res) => {
     const user = await User.findById(req.user._id)
-    const tickets = await Ticket.find({ company: user.company }).sort({createdAt: -1})
+    let tickets
+    if(user.role == "employee"){
+        tickets = await Ticket.find({}).sort({createdAt: -1})
+        res.status(200).json(tickets)
+    } else {
+        tickets = await Ticket.find({ company: user.company }).sort({createdAt: -1})
+    }
     res.status(200).json(tickets)
 }
 
