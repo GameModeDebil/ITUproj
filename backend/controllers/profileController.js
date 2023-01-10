@@ -29,7 +29,7 @@ const getMinUser = async(req, res) => {
     res.status(200).json(returnableUser)
 }
 
-const updateTicket = async (req, res) => {
+const updateUser = async (req, res) => {
     const {id} = req.params
 
     const user = await User.findOneAndUpdate({_id: id}, {
