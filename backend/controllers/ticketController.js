@@ -90,23 +90,18 @@ const updateTicket = async (req, res) => {
 
     if(!title){
         emptyFields.push('title')
-        console.log("title")
     }
     if(!text){
         emptyFields.push('text')
-        console.log("text")
     }
     if(!location){
         emptyFields.push('location')
-        console.log("location")
     }
     if(!priority){
         emptyFields.push('priority')
-        console.log("priority")
     }
     if(!state){
         emptyFields.push('state')
-        console.log("state")
     }
 
     if(emptyFields.length > 0){

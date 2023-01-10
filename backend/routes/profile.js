@@ -1,7 +1,8 @@
 const express = require('express')
 const {
     getUser,
-    getMinUser
+    getMinUser,
+    updateUser
 } = require('../controllers/profileController')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -13,5 +14,9 @@ router.use(requireAuth)
 router.get('/:id', getUser)
 
 router.get("/min/:id", getMinUser)
+
+router.patch('/:id', updateUser)
+
+
 
 module.exports = router
