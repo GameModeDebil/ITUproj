@@ -76,7 +76,6 @@ const TicketDetails = ({ ticket }) => {
             return
         }
         ticket.assigned_employee_id = user.id
-        console.log(ticket)
         const response = await fetch('/api/tickets/' + ticket._id, {
             method: 'PATCH',
             body: JSON.stringify(ticket),
@@ -102,19 +101,34 @@ const TicketDetails = ({ ticket }) => {
                 <div className={ticket.creator === user.id ? ticket.internal ? "internal_ticket own_ticket ticket-details" : "own_ticket ticket-details": ticket.internal ? "internal_ticket ticket-details" : "ticket-details"}>
                     <Link to={"/ticket/" + ticket._id}>
                         <div>
-                            {ticket.priority===1?<h3 className="greenText">{ticket.title}</h3>:""}
-                            {ticket.priority===2?<h3 className="orangeText">{ticket.title}</h3>:""}
-                            {ticket.priority===3?<h3 className="redText">{ticket.title}</h3>:""}
+                            <h3>{ticket.title}</h3>
                             <p className="small"><i>Created: {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })} {ticket.createdAt !== ticket.updatedAt ? "- Updated: " +formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true }) :""}</i></p>
+                            <p><b>Company:</b> {ticket.company}</p>
                             <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
                             <p><b>Location:</b> {ticket.location}</p>
+                            <p><b>Priority:</b></p>
+                            {ticket.priority===1?
+                            <div className="priorityCircle greenText">
+                                <span className="material-symbols-outlined">radio_button_checked</span>
+                            </div>:""
+                            }
+                            {ticket.priority===2?
+                            <div className="priorityCircle orangeText">
+                                <span className="material-symbols-outlined">radio_button_checked</span>
+                            </div>:""
+                            }
+                            {ticket.priority===3?
+                            <div className="priorityCircle redText">
+                                <span className="material-symbols-outlined">radio_button_checked</span>
+                            </div>:""
+                            }
                             {ticket.assigned_employee_id ? <p><b>Assigned to:</b> {employee_name}<i>({employee_email})</i></p>:""}
                             <br></br>
                             <p>{ticket.text}</p>
                         </div>
                     </Link>
                     { user.email === creator_email || user.role==="admin" ? <span className="material-symbols-outlined" onClick={handleClick}>check</span>:""}
-                    { user.role==="employee" ? <div className="claimButtonOverview"><span className="material-symbols-outlined" onClick={handleAssign}>assignment_add</span></div>:""}
+                    { user.role==="employee" && !ticket.assigned_employee_id ? <div className="claimButtonOverview"><span className="material-symbols-outlined" onClick={handleAssign}>assignment_add</span></div>:""}
                 </div>
             </div>
         </div>

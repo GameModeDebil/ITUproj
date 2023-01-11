@@ -17,9 +17,6 @@ const Ticket = () => {
     const { dispatch } = useTicketsContext()
     const { chatMessages, dispatch2 } = useMessagesContext()
 
-    const [emptyFields, setEmptyFields] = useState([])
-    const [error, setError] = useState(null)
-
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [text, setText] = useState('')
@@ -29,14 +26,11 @@ const Ticket = () => {
     const [state, setState] = useState(0)
     const [createdAt, setCreatedAt] = useState('')
     const [updatedAt, setUpdatedAt] = useState('')
-    const [internal, setInternal] = useState(false)
-    const [assignedEmp, setAssignedEmp] = useState('')
     const [ticketID, setTicketID] = useState('')
     const [messageID, setMessageID] = useState('')
 
     const [creator_name, setCreatorName] = useState('')
     const [creator_email, setCreatorEmail] = useState('')
-    const [creator_profile_picture, setCreatorProfilePicture] = useState('')
 
     const [editMode, setEditMode] = useState(false)
     const [editMessageMode, setEditMessageMode] = useState(false)
@@ -59,8 +53,6 @@ const Ticket = () => {
             setState(json.state)
             setCreatedAt(json.createdAt)
             setUpdatedAt(json.updatedAt)
-            setInternal(json.internal)
-            setAssignedEmp(json.assigned_employee_id)
             setTicketID(json._id)
 
             //~~~ Fetch Minimized Creator Profile
@@ -73,7 +65,6 @@ const Ticket = () => {
             const json_creator = await response_creator.json()
             setCreatorName(json_creator.name)
             setCreatorEmail(json_creator.email)
-            setCreatorProfilePicture(json_creator.profile_picture)
         }
 
         const fetchMessages = async () => {
@@ -94,7 +85,7 @@ const Ticket = () => {
             fetchTicket()
             fetchMessages()
         }
-    }, [dispatch, user])
+    }, [dispatch2, user])
 
     const options = [
         {
@@ -121,7 +112,6 @@ const Ticket = () => {
         setEditMode(false)
 
         if (!user) {
-            setError('You must be logged in')
             return
         }
 
@@ -139,16 +129,8 @@ const Ticket = () => {
                 }
             })
             const json = await response2.json()
-    
-            if(!response2.ok){
-                setError(json.error)
-                setEmptyFields(json.emptyFields)
-            }
-    
+
             if(response2.ok){
-                setEmptyFields([])
-                setError(null)
-                //console.log('new ticket added', json)     //debug added ticket
                 dispatch({type: 'DELETE_TICKET', payload: json})
                 dispatch({type: 'CREATE_TICKET', payload: json})
             }
@@ -192,13 +174,31 @@ const Ticket = () => {
             <div className="ticket-details2-main">
                 <div className="ticket-details2">
                     <h2>{title}</h2>
+                    <p className="small">
+                        <i>
+                            Created: {createdAt ? formatDistanceToNow(new Date(createdAt), { addSuffix: true }):""} - Updated:
+                            {updatedAt ? " " + formatDistanceToNow(new Date(updatedAt), { addSuffix: true }):""}
+                        </i>
+                    </p>
+                    <p><b>Company:</b> {company}</p>
                     <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
-                    <p><b>Created:</b> <i>{
-                        createdAt ? formatDistanceToNow(new Date(createdAt), { addSuffix: true }) : ""
-                    }</i></p>
-                    <p><b>Last Update:</b> <i>{
-                        updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : ""
-                    }</i></p>
+                    <p><b>Location:</b> {location}</p>
+                    <p><b>Priority:</b></p>
+                        {priority===1?
+                        <div className="priorityCircle greenText">
+                            <span className="material-symbols-outlined">radio_button_checked</span>
+                        </div>:""
+                        }
+                        {priority===2?
+                        <div className="priorityCircle orangeText">
+                            <span className="material-symbols-outlined">radio_button_checked</span>
+                        </div>:""
+                        }
+                        {priority===3?
+                        <div className="priorityCircle redText">
+                            <span className="material-symbols-outlined">radio_button_checked</span>
+                        </div>:""
+                        }
                     <br></br>
                     <p className="ticket-text">{text}</p>
                     { user.email === creator_email || user.role==="admin" ?
@@ -208,10 +208,10 @@ const Ticket = () => {
                         { user.email === creator_email || user.role==="admin" ? 
                             <span className="material-symbols-outlined" onClick={handleClick}>check</span>
                         :""}
-                    </div> 
+                    </div>
                 </div>
                 {
-                    chatMessages == "" ? "" : <h2>Comments</h2> 
+                    chatMessages === "" ? "" : <h2>Comments</h2> 
                 }
                 <div className="ticket-details-main">
                     {chatMessages && chatMessages.map((chatMessage) => (
@@ -231,7 +231,6 @@ const Ticket = () => {
                         type="text"
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        //className={emptyFields.includes('location') ? 'error' : ''}
                         required
                     />
 
@@ -240,7 +239,6 @@ const Ticket = () => {
                         type="text"
                         onChange={(e) => setText(e.target.value)}
                         value={text}
-                        //className={emptyFields.includes('location') ? 'error' : ''}
                         required
                         className="textfield-height"
                     ></textarea>
@@ -250,7 +248,6 @@ const Ticket = () => {
                         type="text"
                         onChange={(e) => setLocation(e.target.value)}
                         value={location}
-                        //className={emptyFields.includes('location') ? 'error' : ''}
                         required
                     />
 

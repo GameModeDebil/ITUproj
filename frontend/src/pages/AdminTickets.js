@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useTicketsContext } from "../hooks/useTicketsContext"
 
 import AdminTicketDetails from "../components/AdminTicketDetails"
@@ -17,7 +17,7 @@ const AdminTickets = () => {
         }
 
         fetchTickets()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="main-div">

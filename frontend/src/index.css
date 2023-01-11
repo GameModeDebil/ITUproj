@@ -53,6 +53,7 @@ header a {
 .ticket-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
+  color: var(--primary)
 }
 .ticket-details h2 {
   margin: 0 0 10px 0;
@@ -320,16 +321,41 @@ form.signup, form.login {
   display: block;
 }
 
-.main-div {
+.cont{
   background-color: white;
-  padding: 5px 25px 25px;
-  border-radius: 4px;
+  height: 400px;
+  display: flex;
 }
 
-.main-div h2{
+.cont h2{
   color: var(--primary);
 }
 
+.box1{
+  width: 35%;
+  color: white;
+  background-color: #252E3B;
+  padding: 50px;
+}
+.box2{
+  width: 80%;
+  background: linear-gradient(-57deg, var(--primary) 63%, #252E3B 42%);
+  color: white;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
+
+.img1 {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  margin-top: 8%;
+  margin-left: 27%;
+}
 
 .adminTickets table {
   width: 100%;
@@ -453,12 +479,52 @@ th {
   margin-left: 5px;
 }
 
-.redText {
+.redText span {
   color: rgb(237, 15, 15);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
-.orangeText {
+.orangeText span{
   color: rgb(236, 159, 14);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
-.greenText {
+.greenText span{
   color: rgb(17, 178, 17);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.redText span:hover {
+  color: rgb(237, 15, 15);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.orangeText span:hover{
+  color: rgb(236, 159, 14);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.greenText span:hover{
+  color: rgb(17, 178, 17);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
