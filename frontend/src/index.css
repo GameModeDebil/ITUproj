@@ -88,6 +88,19 @@ header a {
   color: #333;
   margin-bottom: 10px;
 }
+
+.button2 span {
+  position: absolute;
+  top: 20px;
+  right: 65px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+  margin-bottom: 10px;
+}
+
 .ticket-details span:hover {
   color: white;
   background-color: var(--primary);

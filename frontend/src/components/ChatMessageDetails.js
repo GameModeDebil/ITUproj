@@ -2,13 +2,20 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom";
 import { useMessagesContext } from '../hooks/useMessagesContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import openEditMessageMode from '../pages/Ticket'
+import { useEffect, useState } from "react"
 
-const ChatMessageDetails = ({chatMessage}) => {
-        const navigate = useNavigate();
-        const { user } = useAuthContext()
-        const {dispatch2} = useMessagesContext()
+const ChatMessageDetails = ({ chatMessage }) => {
+    const [error, setError] = useState(null)
+    const navigate = useNavigate();
+    const { user } = useAuthContext()
+    const { dispatch2 } = useMessagesContext()
+    const [editMessageMode, setEditMessageMode] = useState(false)
+    const [content, setContent] = useState('')
+    const [emptyFields, setEmptyFields] = useState([])
+    const [messageID, setMessageID ] = useState('')
 
-        const handleClick = async () => {
+    const handleClick = async () => {
         if (!user) {
             return
         }
@@ -18,23 +25,81 @@ const ChatMessageDetails = ({chatMessage}) => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
             }
-            
+
         })
         const json = await response.json()
-        dispatch2({type: 'DELETE_CHAT_MESSAGES', payload: json})
-        }     
+        dispatch2({ type: 'DELETE_CHAT_MESSAGES', payload: json })
+    }
 
-    return(
+
+    const setEditModeToTrue = () => {
+        setMessageID(chatMessage._id)
+        setEditMessageMode(true)
+        setContent(chatMessage.content)
+    }
+
+
+    const handleSubmit = async (e) => {
+        setEditMessageMode(false)
+        e.preventDefault()
+
+        const chatMessage = { content }
+
+        const response = await fetch('/api/messages/' + messageID, {
+            method: 'PATCH',
+            body: JSON.stringify(chatMessage),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        const json = await response.json()
+
+        setEmptyFields([])
+        setContent('')
+        dispatch2({ type: 'DELETE_CHAT_MESSAGES', payload: json })
+        dispatch2({ type: 'CREATE_CHAT_MESSAGES', payload: json })
+
+    }
+
+
+
+    if (!editMessageMode) {
+        return (
             <div className="ticket-details">
-                        <div>
-                            <p><b>Posted by:</b> {chatMessage.creator}</p>
-                            <br></br>
-                            <p>{chatMessage.content}</p>
-                            <br></br>
-                            <p className="small"><i>Created: {formatDistanceToNow(new Date(chatMessage.createdAt), { addSuffix: true })} </i></p>
-                        </div>
-                    { user.email === chatMessage.creator || user.role==="admin" ? <span className="material-symbols-outlined" onClick={handleClick}>delete</span>:""}
+                <p><b>Posted by:</b> {chatMessage.creator}</p>
+                <br></br>
+                <p>{chatMessage.content}</p>
+                <br></br>
+                <p className="small"><i>Created: {formatDistanceToNow(new Date(chatMessage.createdAt), { addSuffix: true })} </i></p>
+                <span className="material-symbols-outlined" onClick={setEditModeToTrue}>edit</span>
+                <div className="button2">
+
+                    <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+                </div>
+                <br></br>
             </div>
-    )
+        )
+    }
+
+    else {
+        return (
+            <div className="ticket-details-main">
+                <div className="ticket-details">
+                    <form onSubmit={handleSubmit}>
+                        <label>Content:</label>
+                        <textarea
+                            type="text"
+                            onChange={(e) => setContent(e.target.value)}
+                            value={content}
+                            required
+                        />
+                        <button className="edit-save-button">Save</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+
 }
 export default ChatMessageDetails

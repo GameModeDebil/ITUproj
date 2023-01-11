@@ -53,8 +53,36 @@ const deleteChatMessage = async (req, res) => {
     res.status(200).json(message)
 }
 
+const updateChatMessage = async (req, res) => {
+    const {id} = req.params
+
+    const {content} = req.body
+
+    let emptyFields = []
+
+    if(!content){
+        emptyFields.push('content')
+    }
+
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'Please fill in all the required fields.', emptyFields})
+    }
+
+    const message = await ChatMessage.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+
+
+    if(!message){
+        return res.status(404).json({error: 'Message not found'})
+    }
+    res.status(200).json(message)
+}
+
+
 module.exports = {
     getChatMessages, 
     createChatMessage, 
-    deleteChatMessage
+    deleteChatMessage,
+    updateChatMessage
 }

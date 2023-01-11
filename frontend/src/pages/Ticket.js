@@ -21,6 +21,7 @@ const Ticket = () => {
     const [error, setError] = useState(null)
 
     const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
     const [text, setText] = useState('')
     const [company, setCompany] = useState('')
     const [location, setLocation] = useState('')
@@ -31,12 +32,14 @@ const Ticket = () => {
     const [internal, setInternal] = useState(false)
     const [assignedEmp, setAssignedEmp] = useState('')
     const [ticketID, setTicketID] = useState('')
+    const [messageID, setMessageID] = useState('')
 
     const [creator_name, setCreatorName] = useState('')
     const [creator_email, setCreatorEmail] = useState('')
     const [creator_profile_picture, setCreatorProfilePicture] = useState('')
 
     const [editMode, setEditMode] = useState(false)
+    const [editMessageMode, setEditMessageMode] = useState(false)
 
     useEffect(() => {
         const fetchTicket = async () => {
@@ -83,6 +86,7 @@ const Ticket = () => {
             })
 
             const json = await response.json()
+            setMessageID(json._id)
             dispatch2({type: 'SET_CHAT_MESSAGES', payload: json})
         }
 
@@ -110,6 +114,8 @@ const Ticket = () => {
     const openEditMode = () => {
         setEditMode(true)
     }
+
+    
 
     const closeEditMode = async () => {
         setEditMode(false)
@@ -149,6 +155,8 @@ const Ticket = () => {
         }
     }
 
+
+
     const handleChange = (selected) => {
         setPriority(selected)
     }
@@ -176,6 +184,7 @@ const Ticket = () => {
             navigate("/")
         }
     }
+
 
     //cant add time?
     if (!editMode) {
@@ -205,15 +214,14 @@ const Ticket = () => {
                     chatMessages == "" ? "" : <h2>Comments</h2> 
                 }
                 <div className="ticket-details-main">
-                    {console.log(chatMessages)}
                     {chatMessages && chatMessages.map((chatMessage) => (
                         <ChatMessageDetails key={chatMessage._id} chatMessage={chatMessage} />
                     ))}
                 </div>
                 <ChatMessageForm />
             </div>
-        )
-    } else {
+        )}
+        else {
         return (
             <div className="ticket-details-main">
                 <div className="ticket-details">
