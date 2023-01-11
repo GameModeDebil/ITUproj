@@ -1,11 +1,12 @@
-import { useTicketsContext } from "../hooks/useTicketsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom";
+import { useMessagesContext } from '../hooks/useMessagesContext'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const ChatMessageDetails = ({chatMessage}) => {
         const navigate = useNavigate();
         const { user } = useAuthContext()
-        const {dispatch} = useTicketsContext()
+        const {dispatch2} = useMessagesContext()
 
         const handleClick = async () => {
         if (!user) {
@@ -20,16 +21,20 @@ const ChatMessageDetails = ({chatMessage}) => {
             
         })
         const json = await response.json()
-        dispatch({type: 'DELETE_CHAT_MESSAGES', payload: json})
+        dispatch2({type: 'DELETE_CHAT_MESSAGES', payload: json})
         }     
 
     return(
-        <div className="ticket-details">
-            <p><strong>Author: </strong>{chatMessage.creator}</p>
-            <p>{chatMessage.content}</p>
-            <p>{chatMessage.createdAt}</p>
-            <span onClick={handleClick}>delete</span>
-        </div>
+            <div className="ticket-details">
+                        <div>
+                            <p><b>Posted by:</b> {chatMessage.creator}</p>
+                            <br></br>
+                            <p>{chatMessage.content}</p>
+                            <br></br>
+                            <p className="small"><i>Created: {formatDistanceToNow(new Date(chatMessage.createdAt), { addSuffix: true })} </i></p>
+                        </div>
+                    { user.email === chatMessage.creator || user.role==="admin" ? <span className="material-symbols-outlined" onClick={handleClick}>delete</span>:""}
+            </div>
     )
 }
 export default ChatMessageDetails

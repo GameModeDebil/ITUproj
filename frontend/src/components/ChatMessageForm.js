@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
-import { useTicketsContext } from "../hooks/useTicketsContext"
+import { useMessagesContext } from '../hooks/useMessagesContext'
 
 const ChatMessageForm = () => {
-    const { dispatch } = useTicketsContext()
+    const { dispatch2 } = useMessagesContext()
     const [content, setContent] = useState('')
     const [belongTo, setBelongTo] = useState('')
     const [emptyFields, setEmptyFields] = useState([])
@@ -26,9 +26,18 @@ const ChatMessageForm = () => {
             }
         })
         const json = await response.json()
+
+        if(!response.ok){
+            setError(json.error)
+            setEmptyFields(json.emptyFields)
+        }
+        else{
+        setEmptyFields([])
         setContent('')
-        console.log('new ticket added', json)     //debug added ticket
-        dispatch({type: 'CREATE_CHAT_MESSAGES', payload: json})
+        console.log('new cm added', json)     //debug added ticket
+        dispatch2({type: 'CREATE_CHAT_MESSAGES', payload: json})
+        }
+        
     }
 
 

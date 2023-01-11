@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useTicketsContext } from "../hooks/useTicketsContext"
+import { useMessagesContext } from "../hooks/useMessagesContext"
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import ChatMessageForm from "../components/ChatMessageForm"
@@ -13,7 +14,8 @@ import ChatMessageDetails from '../components/ChatMessageDetails'
 const Ticket = () => {
     const navigate = useNavigate();
     const {user} = useAuthContext()
-    const { chatMessages, dispatch } = useTicketsContext()
+    const { dispatch } = useTicketsContext()
+    const { chatMessages, dispatch2 } = useMessagesContext()
 
     const [emptyFields, setEmptyFields] = useState([])
     const [error, setError] = useState(null)
@@ -81,7 +83,7 @@ const Ticket = () => {
             })
 
             const json = await response.json()
-            dispatch({type: 'SET_CHAT_MESSAGES', payload: json})
+            dispatch2({type: 'SET_CHAT_MESSAGES', payload: json})
         }
 
         if (user) {
