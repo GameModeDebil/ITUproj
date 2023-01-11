@@ -184,8 +184,14 @@ const Ticket = () => {
                     }</i></p>
                     <br></br>
                     <p className="ticket-text">{text}</p>
-                    <span className="material-symbols-outlined" onClick={openEditMode}>edit</span>
-                    <div className="ticketEditButton"><span className="material-symbols-outlined" onClick={handleClick}>check</span></div>
+                    { user.email === creator_email || user.role==="admin" ?
+                        <span className="material-symbols-outlined" onClick={openEditMode}>edit</span>
+                    :""}
+                    <div className="ticketEditButton">
+                        { user.email === creator_email || user.role==="admin" ? 
+                            <span className="material-symbols-outlined" onClick={handleClick}>check</span>
+                        :""}
+                    </div>
                 </div>
                     <h2>Comments</h2>
                 <div className="ticket-details-main">
