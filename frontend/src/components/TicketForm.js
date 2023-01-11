@@ -79,7 +79,6 @@ const TicketForm = () => {
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
-                maxLength="10"
                 className={emptyFields.includes('title') ? 'error' : ''}
             />
 
@@ -88,14 +87,12 @@ const TicketForm = () => {
                 type="text"
                 onChange={(e) => setText(e.target.value)}
                 value={text}
-                maxLength="10"
                 className={emptyFields.includes('text') ? 'error' : 'textfield-height'}
             ></textarea>
             
             <label>Location:</label>
             <input
                 type="text"
-                maxLength="10"
                 onChange={(e) => setLocation(e.target.value)}
                 value={location}
                 className={emptyFields.includes('location') ? 'error' : ''}

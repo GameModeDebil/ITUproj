@@ -87,7 +87,6 @@ const ModalUser = ({account}) => {
             <input
                 type="text"
                 onChange={(e) => setName(e.target.value)}
-                maxLength="10"
                 value={name}
                 required
             />
@@ -96,7 +95,6 @@ const ModalUser = ({account}) => {
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
-                maxLength="10"
                 value={email}
                 required
             ></input>
@@ -106,7 +104,6 @@ const ModalUser = ({account}) => {
                 type="text"
                 onChange={(e) => setCompany(e.target.value)}
                 value={company}
-                maxLength="10"
                 required
             />
 
