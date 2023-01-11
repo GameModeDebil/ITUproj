@@ -53,6 +53,7 @@ header a {
 .ticket-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
+  color: var(--primary)
 }
 .ticket-details h2 {
   margin: 0 0 10px 0;
@@ -440,12 +441,52 @@ th {
   margin-left: 5px;
 }
 
-.redText {
+.redText span {
   color: rgb(237, 15, 15);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
-.orangeText {
+.orangeText span{
   color: rgb(236, 159, 14);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
-.greenText {
+.greenText span{
   color: rgb(17, 178, 17);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.redText span:hover {
+  color: rgb(237, 15, 15);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.orangeText span:hover{
+  color: rgb(236, 159, 14);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.greenText span:hover{
+  color: rgb(17, 178, 17);
+  position: absolute;
+  left: 80px;
+  top: 137px;
+  background-color: transparent;
+  cursor: pointer;
 }
