@@ -38,7 +38,23 @@ const createChatMessage = async (req, res) => {
     }
 }
 
+const deleteChatMessage = async (req, res) => {
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'Message not found'})
+    }
+    const message = await ChatMessage.findOneAndDelete({_id: id})
+
+    if(!message){
+        return res.status(404).json({error: 'Message not found'})
+    }
+
+    res.status(200).json(message)
+}
+
 module.exports = {
     getChatMessages, 
-    createChatMessage
+    createChatMessage, 
+    deleteChatMessage
 }

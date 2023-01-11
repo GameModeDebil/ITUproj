@@ -5,10 +5,13 @@ import { useTicketsContext } from "../hooks/useTicketsContext"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import ChatMessageForm from "../components/ChatMessageForm"
 
+import { useNavigate } from "react-router-dom";
+
 //components 
 import ChatMessageDetails from '../components/ChatMessageDetails'
 
 const Ticket = () => {
+    const navigate = useNavigate();
     const {user} = useAuthContext()
     const { chatMessages, dispatch } = useTicketsContext()
 
@@ -148,6 +151,30 @@ const Ticket = () => {
         setPriority(selected)
     }
 
+    const handleClick = async () => {
+        if (!user) {
+            return
+        }
+        setState(false)
+        const ticket = {title, text, location, priority, state: "false"}
+        const response = await fetch('/api/tickets/' + ticketID, {
+            method: 'PATCH',
+            body: JSON.stringify(ticket),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+
+        })
+        const json = await response.json()
+
+        if (response.ok){
+            dispatch({type: 'DELETE_TICKET', payload: json})
+            dispatch({type: 'CREATE_TICKET', payload: json})
+            navigate("/")
+        }
+    }
+
     //cant add time?
     if (!editMode) {
         return (
@@ -170,7 +197,7 @@ const Ticket = () => {
                         { user.email === creator_email || user.role==="admin" ? 
                             <span className="material-symbols-outlined" onClick={handleClick}>check</span>
                         :""}
-                    </div>
+                    </div> 
                 </div>
                 {
                     chatMessages == "" ? "" : <h2>Comments</h2> 

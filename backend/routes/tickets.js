@@ -10,7 +10,7 @@ const requireAuth = require('../middleware/requireAuth')
 const { 
     createChatMessage, 
     getChatMessages
-} = require('../controllers/chatCommentController')
+} = require('../controllers/chatMessageController')
 
 const router = express.Router()
 

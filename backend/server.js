@@ -6,6 +6,7 @@ const ticketRoutes = require('./routes/tickets')
 const userRoutes = require('./routes/user')
 const adminRoutes = require('./routes/admin')
 const profileRoutes = require('./routes/profile')
+const messagesRoutes = require('./routes/messages')
 
 //express app
 const app = express()
@@ -23,6 +24,7 @@ app.use('/api/tickets', ticketRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/profile', profileRoutes)
+app.use('/api/messages', messagesRoutes)
 
 //connect to db
 mongoose.set('strictQuery', false)

@@ -112,7 +112,7 @@ const TicketDetails = ({ ticket }) => {
                         </div>
                     </Link>
                     { user.email === creator_email || user.role==="admin" ? <span className="material-symbols-outlined" onClick={handleClick}>check</span>:""}
-                    { ((user.role==="employee" || user.role==="admin") && ticket.assigned_employee_id === null) ? <div className="claimButtonOverview"><span className="material-symbols-outlined" onClick={handleAssign}>assignment_add</span></div>:""}
+                    { user.role==="employee" ? <div className="claimButtonOverview"><span className="material-symbols-outlined" onClick={handleAssign}>assignment_add</span></div>:""}
                 </div>
             </div>
         </div>
