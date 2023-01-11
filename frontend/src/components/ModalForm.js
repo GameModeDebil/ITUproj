@@ -103,7 +103,6 @@ const ModalForm = ({ticket}) => {
             <input
                 type="text"
                 onChange={(e) => setTitle(e.target.value)}
-                maxLength="10"
                 value={title}
                 required
             />
@@ -113,7 +112,6 @@ const ModalForm = ({ticket}) => {
                 type="text"
                 onChange={(e) => setText(e.target.value)}
                 className="textfield-height"
-                maxLength="10"
                 value={text}
                 required
             ></textarea>
@@ -123,7 +121,6 @@ const ModalForm = ({ticket}) => {
                 type="text"
                 onChange={(e) => setLocation(e.target.value)}
                 value={location}
-                maxLength="10"
                 required
             />
 

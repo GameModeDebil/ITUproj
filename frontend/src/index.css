@@ -53,7 +53,6 @@ header a {
 .ticket-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
-  color: var(--primary);
 }
 .ticket-details h2 {
   margin: 0 0 10px 0;
@@ -416,7 +415,6 @@ th {
   color: var(--primary);
   cursor: pointer;
   font-size: 1.5rem;
-  left: 50%;
   padding: 6px;
   margin-left: 5px;
 }
@@ -438,7 +436,16 @@ th {
   color: var(--primary);
   cursor: pointer;
   font-size: 1.5rem;
-  left: 50%;
   padding: 6px;
   margin-left: 5px;
+}
+
+.redText {
+  color: rgb(237, 15, 15);
+}
+.orangeText {
+  color: rgb(236, 159, 14);
+}
+.greenText {
+  color: rgb(17, 178, 17);
 }

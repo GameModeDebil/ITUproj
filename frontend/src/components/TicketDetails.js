@@ -102,7 +102,9 @@ const TicketDetails = ({ ticket }) => {
                 <div className={ticket.creator === user.id ? ticket.internal ? "internal_ticket own_ticket ticket-details" : "own_ticket ticket-details": ticket.internal ? "internal_ticket ticket-details" : "ticket-details"}>
                     <Link to={"/ticket/" + ticket._id}>
                         <div>
-                            <h3>{ticket.title}</h3>
+                            {ticket.priority===1?<h3 className="greenText">{ticket.title}</h3>:""}
+                            {ticket.priority===2?<h3 className="orangeText">{ticket.title}</h3>:""}
+                            {ticket.priority===3?<h3 className="redText">{ticket.title}</h3>:""}
                             <p className="small"><i>Created: {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })} {ticket.createdAt !== ticket.updatedAt ? "- Updated: " +formatDistanceToNow(new Date(ticket.updatedAt), { addSuffix: true }) :""}</i></p>
                             <p><b>Created by:</b> {creator_name}<i>({creator_email})</i></p>
                             <p><b>Location:</b> {ticket.location}</p>

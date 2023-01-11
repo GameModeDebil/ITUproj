@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 
 
 //comp
-import ModalForm from '../components/ModalForm'
+import ModalUser from "../components/ModalUser";
 
 const customStyles = {
     content: {
@@ -26,13 +26,48 @@ const customStyles = {
 const AdminUserDetails = ({ account }) => {
     
     const { dispatch } = useTicketsContext()
-    const { user } = useAuthContext()
+    const { user } = useAuthContext()  
+    const [editProfile, setEditProfile] = useState(false)
+    
+    
+    const [creator_name, setCreatorName] = useState('')
+    const [creator_email, setCreatorEmail] = useState('')
+    const [creator_profile_picture, setCreatorProfilePicture] = useState('')
+    
+
+    
+    const editUser = () => {
+        setEditProfile(true)
+    }
+    const closeEditUser = () => {
+        setEditProfile(false)
+    }
+    
+    useEffect(() => {
+        const fetchCreator = async () => {
+            
+            //~~~ Fetch Minimized Creator Profile
+            const response_creator = await fetch('/api/profile/min/' + account._id, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            const json_creator = await response_creator.json()
+            setCreatorName(json_creator.name)
+            setCreatorEmail(json_creator.email)
+            setCreatorProfilePicture(json_creator.profile_picture)
+        }
+
+        if (user) {
+            fetchCreator()
+        }
+    }, [account])
     
     const deleteUser = async () => {
         if (!user) {
             return
         }
-        const response = await fetch('/api/tickets/' + account._id, {
+        const response = await fetch('/api/user/' + account._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`
@@ -42,30 +77,39 @@ const AdminUserDetails = ({ account }) => {
         const json = await response.json()
     
         if (response.ok){
-            dispatch({type: 'DELETE_TICKET', payload: json})
+            dispatch({type: 'DELETE_USER', payload: json})
         }
     }
     
-    
-    
-    
-    
-    
-    
-    return (
-        <tbody>
-            <tr className="admin-users">
-                <td>{account.name}</td>
-                <td>{account.email}</td>
-                <td>{account.phone}</td>
-                <td>{account.company}</td>
-                <td>{account.role}</td>
-                <td>{account.verified}</td>
-                <span className="material-symbols-outlined" >edit</span>
-                <span className="material-symbols-outlined" onClick={deleteUser}>delete</span>
-            </tr>
-            </tbody>
-    )
+    if(!editProfile)
+    {
+        return (
+            <tbody>
+                <tr className="admin-users">
+                    <td>{account.name}</td>
+                    <td>{account.email}</td>
+                    <td>{account.phone}</td>
+                    <td>{account.company}</td>
+                    <td>{account.role}</td>
+                    <td>{account.verified}</td>
+                    <span className="material-symbols-outlined" onClick={editUser}>edit</span>
+                    <span className="material-symbols-outlined" onClick={deleteUser}>delete</span>
+                </tr>
+                </tbody>
+        )
+    } else {
+        return(
+        <Modal
+            appElement={document.getElementById('root') || undefined}
+            isOpen={editProfile}
+            onRequestClose={closeEditUser}
+            style={customStyles}
+        >
+            <ModalUser key={account._id} account={account} />
+        </Modal>
+        )
+    }
+
 }
 
 export default AdminUserDetails

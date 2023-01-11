@@ -16,26 +16,6 @@ export const ticketsReducer = (state, action) => {
             return {
                 tickets: state.tickets.filter((ticket) => ticket._id !== action.payload._id)
             }
-        case 'SET_CHAT_MESSAGES':
-            return {
-                chatMessages: action.payload
-            }
-        case 'CREATE_CHAT_MESSAGES':
-            return {
-                chatMessages: [action.payload, ...state.chatMessages]
-            }
-        case 'DELETE_CHAT_MESSAGES':
-            return {
-                chatMessages: state.chatMessages.filter((chatMessage) => chatMessage._id !== action.payload._id)
-            }
-
-        
-        /*case 'UPDATE_TICKET':
-                tickets = state.tickets.filter((ticket) => ticket._id !== action.payload._id)
-            return {
-                tickets: [action.payload, ...state.tickets]
-            }*/
-
         default:
             return state
     }
