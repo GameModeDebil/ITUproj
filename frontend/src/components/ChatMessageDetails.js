@@ -15,6 +15,7 @@ const ChatMessageDetails = ({ chatMessage }) => {
     const [emptyFields, setEmptyFields] = useState([])
     const [messageID, setMessageID ] = useState('')
 
+    
     const handleClick = async () => {
         if (!user) {
             return
@@ -60,8 +61,16 @@ const ChatMessageDetails = ({ chatMessage }) => {
         dispatch2({ type: 'DELETE_CHAT_MESSAGES', payload: json })
         dispatch2({ type: 'CREATE_CHAT_MESSAGES', payload: json })
 
+        let url = window.location.pathname
+        url = url.split("/")[2]
+        const response1 = await fetch('/api/tickets/' + url + '/cm', {
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+            })
+        const json1 = await response1.json()
+        dispatch2({type: 'SET_CHAT_MESSAGES', payload: json1})
     }
-
 
 
     if (!editMessageMode) {
