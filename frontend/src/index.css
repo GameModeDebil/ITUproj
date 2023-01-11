@@ -308,16 +308,41 @@ form.signup, form.login {
   display: block;
 }
 
-.main-div {
+.cont{
   background-color: white;
-  padding: 5px 25px 25px;
-  border-radius: 4px;
+  height: 400px;
+  display: flex;
 }
 
-.main-div h2{
+.cont h2{
   color: var(--primary);
 }
 
+.box1{
+  width: 35%;
+  color: white;
+  background-color: #252E3B;
+  padding: 50px;
+}
+.box2{
+  width: 80%;
+  background: linear-gradient(-57deg, var(--primary) 63%, #252E3B 42%);
+  color: white;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
+
+.img1 {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  margin-top: 8%;
+  margin-left: 27%;
+}
 
 .adminTickets table {
   width: 100%;

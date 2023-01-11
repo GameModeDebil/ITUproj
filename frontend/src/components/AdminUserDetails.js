@@ -29,13 +29,6 @@ const AdminUserDetails = ({ account }) => {
     const { user } = useAuthContext()  
     const [editProfile, setEditProfile] = useState(false)
     
-    
-    const [creator_name, setCreatorName] = useState('')
-    const [creator_email, setCreatorEmail] = useState('')
-    const [creator_profile_picture, setCreatorProfilePicture] = useState('')
-    
-
-    
     const editUser = () => {
         setEditProfile(true)
     }
@@ -53,9 +46,6 @@ const AdminUserDetails = ({ account }) => {
                 }
             })
             const json_creator = await response_creator.json()
-            setCreatorName(json_creator.name)
-            setCreatorEmail(json_creator.email)
-            setCreatorProfilePicture(json_creator.profile_picture)
         }
 
         if (user) {
@@ -88,12 +78,11 @@ const AdminUserDetails = ({ account }) => {
                 <tr className="admin-users">
                     <td>{account.name}</td>
                     <td>{account.email}</td>
-                    <td>{account.phone}</td>
                     <td>{account.company}</td>
                     <td>{account.role}</td>
                     <td>{account.verified}</td>
                     <span className="material-symbols-outlined" onClick={editUser}>edit</span>
-                    <span className="material-symbols-outlined" onClick={deleteUser}>delete</span>
+                    {user.id !== account._id ? <span className="material-symbols-outlined" onClick={deleteUser}>delete</span>:""}
                 </tr>
                 </tbody>
         )

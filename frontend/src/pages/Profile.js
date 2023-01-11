@@ -6,9 +6,7 @@ const Profile = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [phone, setPhonenumber] = useState('')
     const [company, setCompany] = useState('')
-    const [profilePicture, setProfilePicture] = useState('')
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -22,9 +20,7 @@ const Profile = () => {
             const json = await response.json()
             setName(json.name)
             setEmail(json.email)
-            setPhonenumber(json.phone)
             setCompany(json.company)
-            setProfilePicture(json.profile_picture)
         }
 
         if (user) {
@@ -34,11 +30,17 @@ const Profile = () => {
     }, [user])
 
     return (
-        <div className="main-div">
-            <h2>{name}</h2>
-            <p><b>Email:</b> <i>{email}</i></p>
-            <p><b>Phone:</b> <i>{phone}</i></p>
-            <p><b>Works at:</b> <i>{company}</i></p>
+        <div className="cont">   
+            <div className="box1">
+                <h2>{name}</h2>
+                <p><b>Email:</b> <i>{email}</i></p>
+                <p><b>Works at:</b> <i>{company}</i></p>
+            </div>
+            <div className="box2">
+                <div className="img1">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" ></img>
+                </div>
+            </div>
         </div>
     )
 }

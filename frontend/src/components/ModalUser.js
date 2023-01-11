@@ -1,30 +1,19 @@
 import { useState, useEffect } from "react"
 import { useTicketsContext } from "../hooks/useTicketsContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import { useNavigate } from "react-router-dom";
 
 
 
 const ModalUser = ({account}) => {
-    const navigate = useNavigate();
     const { dispatch } = useTicketsContext()
     const { user } = useAuthContext()
-    const [emptyFields, setEmptyFields] = useState([])
 
     const [error, setError] = useState(null)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [company, setCompany] = useState('')
     const [role, setRole] = useState('')
-    const [state, setState] = useState(false)
-    const [ticketID, setTicketID] = useState('')
-    const [createdAt, setCreatedAt] = useState('')
-    const [updatedAt, setUpdatedAt] = useState('')
     const [verified, setVerified] = useState('')
-    const [assignedEmp, setAssignedEmp] = useState('')
-    const [creator_email, setCreatorEmail] = useState('')
-    const [creator_profile_picture, setCreatorProfilePicture] = useState('')
-    const [editMode, setEditMode] = useState(false)
     const [profileID,setUserID] = useState('')
     
     
@@ -62,11 +51,9 @@ const ModalUser = ({account}) => {
     
             if(!response2.ok){
                 setError(json.error)
-                setEmptyFields(json.emptyFields)
             }
     
             if(response2.ok){
-                setEmptyFields([])
                 setError(null)
                 //console.log('new ticket added', json)     //debug added ticket
                 dispatch({type: 'DELETE_TICKET', payload: json})
