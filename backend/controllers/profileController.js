@@ -28,19 +28,20 @@ const getMinUser = async(req, res) => {
     const { password, phone, company, role, verified, ...returnableUser} = user._doc;
     res.status(200).json(returnableUser)
 }
-
+//update user
 const updateUser = async (req, res) => {
     const {id} = req.params
-
+    console.log(id)
     const user = await User.findOneAndUpdate({_id: id}, {
         ...req.body
     })
 
 
     if(!user){
+        
         return res.status(404).json({error: 'User not found'})
     }
-
+    console.log(user)
     res.status(200).json(user)
 }
 

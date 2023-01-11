@@ -20,6 +20,9 @@ const customStyles = {
       border: '1px solid black'
     },
 };
+
+
+
 const AdminTicketDetails = ({ ticket }) => {
     
     const [editMode, setEditMode] = useState(false)
@@ -87,7 +90,7 @@ const AdminTicketDetails = ({ ticket }) => {
                     <td>{ticket.creator}</td>
                     <td>{ticket.location}</td>
                     <td>{ticket.priority}</td>
-                    <td>{ticket.state}</td>
+                    <td>{ticket.state ? "true" : "false"}</td>
                     <td>{ticket.completion_date}</td>
                     <td>{ticket.internal ? "true" : "false"}</td>
                     <td>{ticket.assigned_employee_id}</td>
