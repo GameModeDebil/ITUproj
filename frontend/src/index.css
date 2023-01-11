@@ -323,9 +323,6 @@ form.signup, form.login {
   width: 100%;
 }
 
-.adminTickets table, td, th {
-  border:1px solid black;
-}
 
 .adminTickets td, th{
   padding: 10px 10px;
@@ -335,9 +332,6 @@ form.signup, form.login {
   width: 100%;
 }
 
-.adminUsers table, td, th {
-  border:1px solid black;
-}
 
 .adminUsers td, th {
   padding: 10px 10px;
@@ -412,4 +406,39 @@ th {
 
 .ticket-details-main .own_ticket {
   box-shadow: 2px 2px 5px var(--primary);
+}
+
+.admin-ticket span{
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  bottom: 20px;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.5rem;
+  left: 50%;
+  padding: 6px;
+  margin-left: 5px;
+}
+.admin-ticket span:hover{
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  color: white;
+}
+.admin-users span:hover{
+  background: var(--primary);
+  border: 2px solid var(--primary);
+  color: white;
+}
+.admin-users span{
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  bottom: 20px;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 1.5rem;
+  left: 50%;
+  padding: 6px;
+  margin-left: 5px;
 }

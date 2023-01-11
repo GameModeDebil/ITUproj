@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
+import { useTicketsContext } from "../hooks/useTicketsContext"
 
 import AdminTicketDetails from "../components/AdminTicketDetails"
 
 const AdminTickets = () => {
-    const [tickets, setTickets] = useState(null)
+    const {tickets, dispatch} = useTicketsContext()
 
     useEffect(() => {
         const fetchTickets = async () => {
@@ -11,7 +12,7 @@ const AdminTickets = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setTickets(json)
+                dispatch({type: 'SET_TICKETS', payload: json})
             }
         }
 
@@ -38,6 +39,7 @@ const AdminTickets = () => {
                     </thead>
                     {tickets && tickets.map((ticket) => (
                         <AdminTicketDetails key={ticket._id} ticket={ticket} />
+
                     ))}
                 </table>
             </div>

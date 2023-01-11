@@ -27,14 +27,13 @@ const AdminUsers = () => {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Phone</th>
                             <th>Company</th>
                             <th>Role</th>
                             <th>Verified</th>
                         </tr>
                     </thead>
                     {users && users.map((user) => (
-                        <AdminUserDetails key={user._id} user={user} />
+                        <AdminUserDetails key={user._id} account={user} />
                     ))}
                 </table>
             </div>
